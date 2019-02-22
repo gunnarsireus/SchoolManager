@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Course Students";
 }
-<h2>Students in Course</h2>
+<h2>Students in Courses</h2>
 
 <script type="text/javascript">
     function ShowStudents() {
@@ -14,7 +14,7 @@
     if (ViewBag.CourseId != null)
     {
         <table>
-            <tr class="page-header">Students in courses</tr>
+            <tr class="page-header"><bold>Select course:</bold></tr>
             <tr>
                 <td>
                     @Html.DropDownList("StudentsForCourse", Model.CourseSelectList, new { onchange = "ShowStudents()" })

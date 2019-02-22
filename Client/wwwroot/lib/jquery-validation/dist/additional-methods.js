@@ -52,7 +52,7 @@ $.validator.addMethod("accept", function(value, element, param) {
 	}
 
 	if ($(element).attr("type") === "file") {
-		// If we are using a wildstudentd, make it regex friendly
+		// If we are using a wildcard, make it regex friendly
 		typeParam = typeParam.replace(/\*/g, ".*");
 
 		// Check if the element has a FileList before checking each file
@@ -83,7 +83,7 @@ $.validator.addMethod("alphanumeric", function(value, element) {
  * We accept the notation with spaces, as that is common.
  * acceptable: 123456789 or 12 34 56 789
  */
-$.validator.addMethod("CourseNL", function(value, element) {
+$.validator.addMethod("CompanyNL", function(value, element) {
 	if (this.optional(element)) {
 		return true;
 	}
@@ -105,7 +105,7 @@ $.validator.addMethod("CourseNL", function(value, element) {
 
 $.validator.addMethod("bankorgiroaccountNL", function(value, element) {
 	return this.optional(element) ||
-			($.validator.methods.CourseNL.call(this, value, element)) ||
+			($.validator.methods.CompanyNL.call(this, value, element)) ||
 			($.validator.methods.giroaccountNL.call(this, value, element));
 }, "Please specify a valid bank or giro account number");
 
@@ -160,7 +160,7 @@ $.validator.addMethod( "cifES", function( value ) {
 	 *	A. Corporations
 	 *	B. LLCs
 	 *	C. General partnerships
-	 *	D. Courses limited partnerships
+	 *	D. Companies limited partnerships
 	 *	E. Communities of goods
 	 *	F. Cooperative Societies
 	 *	G. Associations
@@ -246,11 +246,11 @@ $.validator.addMethod("cpfBR", function(value) {
 
 }, "Please specify a valid CPF number");
 
-/* NOTICE: Modified version of Castle.Components.Validator.CreditStudentdValidator
+/* NOTICE: Modified version of Castle.Components.Validator.CreditCardValidator
  * Redistributed under the the Apache License 2.0 at http://www.apache.org/licenses/LICENSE-2.0
- * Valid Types: masterstudentd, visa, amex, dinersclub, enroute, discover, jcb, unknown, all (overrides all other settings)
+ * Valid Types: mastercard, visa, amex, dinersclub, enroute, discover, jcb, unknown, all (overrides all other settings)
  */
-$.validator.addMethod("creditstudentdtypes", function(value, element, param) {
+$.validator.addMethod("creditcardtypes", function(value, element, param) {
 	if (/[^0-9\-]+/.test(value)) {
 		return false;
 	}
@@ -259,7 +259,7 @@ $.validator.addMethod("creditstudentdtypes", function(value, element, param) {
 
 	var validTypes = 0x0000;
 
-	if (param.masterstudentd) {
+	if (param.mastercard) {
 		validTypes |= 0x0001;
 	}
 	if (param.visa) {
@@ -286,7 +286,7 @@ $.validator.addMethod("creditstudentdtypes", function(value, element, param) {
 	if (param.all) {
 		validTypes = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
 	}
-	if (validTypes & 0x0001 && /^(5[12345])/.test(value)) { //masterstudentd
+	if (validTypes & 0x0001 && /^(5[12345])/.test(value)) { //mastercard
 		return value.length === 16;
 	}
 	if (validTypes & 0x0002 && /^(4)/.test(value)) { //visa
@@ -314,7 +314,7 @@ $.validator.addMethod("creditstudentdtypes", function(value, element, param) {
 		return true;
 	}
 	return false;
-}, "Please enter a valid credit studentd number.");
+}, "Please enter a valid credit card number.");
 
 /**
  * Validates currencies with any given symbols by @jameslouiz
@@ -933,7 +933,7 @@ $.validator.addMethod("url2", function(value, element) {
 }, $.validator.messages.url);
 
 /**
- * Return true, if the value is a valid vehicle identification number (FirstName).
+ * Return true, if the value is a valid vehicle identification number (VIN).
  *
  * Works with all kind of text inputs.
  *
@@ -985,7 +985,7 @@ $.validator.addMethod("vinUS", function(v) {
 		return true;
 	}
 	return false;
-}, "The specified vehicle identification number (FirstName) is invalid.");
+}, "The specified vehicle identification number (VIN) is invalid.");
 
 $.validator.addMethod("zipcodeUS", function(value, element) {
 	return this.optional(element) || /^\d{5}(-\d{4})?$/.test(value);

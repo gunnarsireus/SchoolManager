@@ -332,7 +332,7 @@ $.extend( $.validator, {
 		dateISO: "Please enter a valid date ( ISO ).",
 		number: "Please enter a valid number.",
 		digits: "Please enter only digits.",
-		creditstudentd: "Please enter a valid credit studentd number.",
+		creditcard: "Please enter a valid credit card number.",
 		equalTo: "Please enter the same value again.",
 		maxlength: $.validator.format( "Please enter no more than {0} characters." ),
 		minlength: $.validator.format( "Please enter at least {0} characters." ),
@@ -965,7 +965,7 @@ $.extend( $.validator, {
 		dateISO: { dateISO: true },
 		number: { number: true },
 		digits: { digits: true },
-		creditstudentd: { creditstudentd: true }
+		creditcard: { creditcard: true }
 	},
 
 	addClassRules: function( className, rules ) {
@@ -1216,9 +1216,9 @@ $.extend( $.validator, {
 			return this.optional( element ) || /^\d+$/.test( value );
 		},
 
-		// http://jqueryvalidation.org/creditstudentd-method/
+		// http://jqueryvalidation.org/creditcard-method/
 		// based on http://en.wikipedia.org/wiki/Luhn_algorithm
-		creditstudentd: function( value, element ) {
+		creditcard: function( value, element ) {
 			if ( this.optional( element ) ) {
 				return "dependency-mismatch";
 			}
@@ -1234,7 +1234,7 @@ $.extend( $.validator, {
 			value = value.replace( /\D/g, "" );
 
 			// Basing min and max length on
-			// http://developer.ean.com/general_info/Valid_Credit_Studentd_Types
+			// http://developer.ean.com/general_info/Valid_Credit_Card_Types
 			if ( value.length < 13 || value.length > 19 ) {
 				return false;
 			}

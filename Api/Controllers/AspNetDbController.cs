@@ -2,7 +2,6 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
-using Api.Utils;
 
 namespace Api.Controllers
 {
@@ -14,8 +13,7 @@ namespace Api.Controllers
 		[EnableCors("AllowAllOrigins")]
 		public string GetAspNetDb()
 		{
-            //return Directory.GetCurrentDirectory() + "\\App_Data\\AspNet.db";
-            return Helpers.GetAspNetDbConnection();
+			return Directory.GetCurrentDirectory() + "\\App_Data\\AspNet.db";
 		}
 	}
 }

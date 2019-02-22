@@ -5,25 +5,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Client.Models;
+using Client.Models.HomeViewModel;
 
 namespace Client.Controllers
 {
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
+		public async Task<IActionResult> Index()
+		{
+			List<Company> companies;
+			try
+			{
+				companies = await Utils.Get<List<Company>>("api/Company");
+			}
+			catch (Exception e)
+			{
+				TempData["CustomError"] = "Ingen kontakt med servern! Api måste startas innan Client kan köras!";
+				return View(new HomeViewModel { Companies = new List<Company>()});
+			}
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+			var allCars = await Utils.Get<List<Car>>("api/Car");
+            foreach (var car in allCars)
+            {
+                car.Disabled = false; //Enable updates of Online/Offline
+                await Utils.Put<Car>("api/Car/" + car.Id, car);
+            }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+            foreach (var company in companies)
+			{
+				var companyCars = allCars.Where(o => o.CompanyId == company.Id).ToList();
+				company.Cars = companyCars;
+			}
+			var homeViewModel = new HomeViewModel { Companies = companies };
+			return View(homeViewModel);
+		}
+
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }

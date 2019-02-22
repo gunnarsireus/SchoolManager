@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Api.Models;
-using Api.Utils;
 
 namespace Api.DAL
 {
@@ -14,7 +13,7 @@ namespace Api.DAL
 
         public CarDataAccess()
         {
-            _optionsBuilder.UseSqlServer(Helpers.GetSqlConnection()); ;
+            _optionsBuilder.UseSqlite("DataSource=App_Data/Car.db");
         }
 
 	    public ICollection<Car> GetCars()

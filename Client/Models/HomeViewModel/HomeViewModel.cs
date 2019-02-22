@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Client.Models.HomeViewModel
 {
-    public class HomeViewModel : Car
+    public class HomeViewModel : Student
     {
-	    public List<Company> Companies { get; set; }
+	    public List<Course> Courses { get; set; }
 	}
 }

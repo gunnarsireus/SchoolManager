@@ -433,7 +433,7 @@ namespace Client.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("Car"),
+                _urlEncoder.Encode("Student"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

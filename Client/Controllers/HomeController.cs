@@ -13,30 +13,30 @@ namespace Client.Controllers
 	{
 		public async Task<IActionResult> Index()
 		{
-			List<Company> companies;
+			List<Course> courses;
 			try
 			{
-				companies = await Utils.Get<List<Company>>("api/Company");
+				courses = await Utils.Get<List<Course>>("api/Course");
 			}
 			catch (Exception e)
 			{
-				TempData["CustomError"] = "Ingen kontakt med servern! Api måste startas innan Client kan köras!";
-				return View(new HomeViewModel { Companies = new List<Company>()});
+				TempData["CustomError"] = "No contact with server! Api must be started before Client can run!";
+				return View(new HomeViewModel { Courses = new List<Course>()});
 			}
 
-			var allCars = await Utils.Get<List<Car>>("api/Car");
-            foreach (var car in allCars)
+			var allStudents = await Utils.Get<List<Student>>("api/Student");
+            foreach (var student in allStudents)
             {
-                car.Disabled = false; //Enable updates of Online/Offline
-                await Utils.Put<Car>("api/Car/" + car.Id, car);
+                student.Disabled = false; //Enable updates of Present/Absent
+                await Utils.Put<Student>("api/Student/" + student.Id, student);
             }
 
-            foreach (var company in companies)
+            foreach (var course in courses)
 			{
-				var companyCars = allCars.Where(o => o.CompanyId == company.Id).ToList();
-				company.Cars = companyCars;
+				var courseStudents = allStudents.Where(o => o.CourseId == course.Id).ToList();
+				course.Students = courseStudents;
 			}
-			var homeViewModel = new HomeViewModel { Companies = companies };
+			var homeViewModel = new HomeViewModel { Courses = courses };
 			return View(homeViewModel);
 		}
 

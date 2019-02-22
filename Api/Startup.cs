@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Api.DAL;
@@ -14,7 +13,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApiContext>(options =>
-                options.UseSqlite("DataSource=App_Data/Car.db"));
+                options.UseSqlite("DataSource=App_Data/School.db"));
 
             services.AddMvc();
 

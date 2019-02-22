@@ -35,16 +35,5 @@ namespace Api.Utils
         {
             return GetServerFolder() + appSettingsDbLocation + Path.DirectorySeparatorChar;
         }
-
-
-        public static string GetSqlConnection()
-        {
-            return "Server=tcp:sireusdbserver.database.windows.net,1433;Initial Catalog=car;Persist Security Info=False;User ID=sireus;Password=GS1@azure;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        }
-
-        public static string GetAspNetDbConnection()
-        {
-            return "Server=tcp:sireusdbserver.database.windows.net,1433;Initial Catalog=aspnetdb;Persist Security Info=False;User ID=sireus;Password=GS1@azure;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-        }
     }
 }

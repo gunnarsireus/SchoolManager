@@ -30,17 +30,17 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a asp-area="" asp-controller="Home" asp-action="Index">All Vehicles</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index">All  Courses</a>
                 </li>
                 @inject SignInManager<ApplicationUser> SignInManager
                 @inject UserManager<ApplicationUser> UserManager
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li>
-                        <a asp-area="" asp-controller="Company" asp-action="Index">Companies</a>
+                        <a asp-area="" asp-controller="Course" asp-action="Index">Courses</a>
                     </li>
                     <li>
-                        <a asp-area="" asp-controller="Car" asp-action="Index">Company Vehicles</a>
+                        <a asp-area="" asp-controller="Student" asp-action="Index">Students in Course</a>
                     </li>
                 }
             </ul>
@@ -52,7 +52,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; 2017 - Company Vehicles</p>
+        <p>&copy; 2019 - Schcool Courses</p>
     </footer>
 </div>
 

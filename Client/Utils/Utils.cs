@@ -8,7 +8,7 @@ namespace Client
 {
 	public static class Utils
 	{
-		private static readonly Uri Endpoint = new Uri("http://localhost:54411//");
+		private static readonly Uri Endpoint = new Uri("http://localhost:54401//");
 
 		public static async Task<T> Get<T>(string url)
 		{
